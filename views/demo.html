@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+{% raw %}
+<html lang="en" ng-app="mainApp">
+<head>
+    <title>3D Platform</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <!-- <link rel="import" href="static/assets/html/deviceDetail.html" id="deviceDetail"/> -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet" type='text/css'/>
+    <!-- <link href="static/assets/css/_bootstrap.css" rel="stylesheet" type='text/css'/> -->
+    <link href="static/assets/css/font-awesome.css" rel="stylesheet" type='text/css'/>
+    <link href='static/assets/css/font-Lobster.css' rel='stylesheet' type='text/css' />
+    <link href="static/assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="static/assets/css/toastr.css" rel="stylesheet" type="text/css"/>
+    <link href="static/assets/css/jquery-confirm.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="static/assets/css/pager.css" rel="stylesheet" type="text/css"/>
+    <link href="static/assets/css/pagination.css" rel="stylesheet" type="text/css"/>
+
+    <script src="https://cdn.bootcss.com/angular.js/1.6.9/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.9/angular-resource.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/three.js/92/three.min.js"></script>
+    <script src="static/gis_815/js/libs/stats.min.js"></script>
+    <script src="static/gis_815/js/libs/dat.gui.min.js"></script>
+    <script src="static/gis_815/js/controls/OrbitControls.js"></script>
+    <script src="static/gis_815/js/controls/TransformControls.js"></script>
+    <script src="static/gis_815/js/controls/PointerLockControls.js"></script>
+    <script src="static/gis_815/js/controls/TrackballControls.js"></script>
+    <script src="static/gis_815/js/loaders/STLLoader.js"></script>
+    <script src="static/gis_815/js/Detector.js"></script>
+    <script src="static/gis_815/DRACOLoader.js"></script>
+    <script src="static/gis_815/geometry_helper.js"></script>
+    <script src="static/gis_815/draco_decoder.js"></script>
+    <script src="static/assets/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="static/assets/js/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script src="static/assets/js/pager.js"></script>
+    <script src="static/assets/js/pagination.js"></script>
+
+    <!-- echarts  历史数据-->
+    <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.js"></script>
+
+        
+</head>
+
+<body ng-controller="mainCtrl">
+    <div id="_deviceDetail" class="deviceDetailStyle" ng-controller="deviceCtrPanel">
+        <!--加载deviceDetail.html中的html标签-->
+        <script>
+            $("#_deviceDetail").load("static/assets/html/deviceDetail.html");
+        </script>
+    </div>
+    <div id="container"></div>
+    <div id="coords"></div>
+    <div id="tip" ng-click="moveShowDetail()"></div>
+    <div id="title">3D Platform</div>
+    <div id="info">
+        <br>
+        变换设备模型: "Q" 平移 | "W" 旋转 | "E" 缩放 | "+","-" 增大缩小size | "ESC" 退出变换<br />
+        <div id="blocker">
+
+            <div id="instructions">
+                <span style="font-size:14px">点击开始漫游</span>
+                <br />
+                (W, A, S, D = 移动, 鼠标移动 = 查看四周,ESC = 退出)
+            </div>
+    
+        </div>
+        
+    </div>
+    <!-- <div id="blocker">
+
+        <div id="instructions">
+            <span style="font-size:18px">点击开始</span>
+            <br />
+            (W, A, S, D = 移动, 鼠标移动 = 查看四周,ESC = 退出)
+        </div>
+
+    </div> -->
+    <div id="Loading"></div>
+    <script src="static/assets/js/addDeviceModel.js"></script>
+    <script src="static/assets/js/815_scene.js"></script>
+    <script src="static/assets/js/mainCtrl.js"></script>
+    <script src="static/assets/js/deviceCtrPanel.js"></script>
+    <script src="static/assets/js/toastr.js"></script>
+
+<!--div id="packUpDiv">
+    <div id="packUpSpan"><i class="fa fa-reorder" id="packUp" ng-click="left()"></i>
+    <div class="tooltiptext">
+        菜单
+    </div>
+    </div>
+</div-->
+<div id="packUpDiv">
+    <div id="packUpSpan"><i class="fa fa-reorder" id="packUp" ng-click="packSearchMenu()"></i>
+    <div class="tooltiptext">
+        菜单
+    </div>
+    </div>
+</div>
+<div id="searchBanner">
+    <div class="input-group"  id="searchDeviceDiv">
+        <input type="text" class="form-control" size="15" placeholder="请输入设备名称..." id="searchDevice">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" id="btn" ng-click="searchDeviceInfo()" style="margin-bottom: 4px;"><i class="fa fa-search"></i></button>
+        </span>
+    </div>
+    <div ng-click="changeIcon()" id="iconSpan"><i class="fa fa-angle-double-down" id="icon" title="显示设备列表"></i>
+    </div>
+</div>
+<!--导航栏-->
+<div id="arrow" style="list-style-type: none">
+    <div class="active" ng-click="shows()">
+        <i class="fa fa-angle-double-left" style="margin-left: 120px;font-size: large"></i>
+    </div>
+    <div class="active">
+        <i class="fa fa-home" style="text-align: left;"></i>
+        <span class="centerMove">主页</span>
+    </div>
+    <div class="active" ng-click="searchShows()">
+        <i class="fa fa-search"></i>
+        <span class="centerMove">搜索</span>
+    </div>
+    <div class="active" ng-click="showList()">
+        <i class="fa fa-file-text"></i>
+        <span class="centerMove">设备列表</span>
+    </div>
+    <div class="active" ng-click="loadLocalModel()">
+        <i class="fa fa-th"></i>
+        <span class="centerMove">加载本地模型</span>
+    </div>
+    <div class="active">
+        <i class="fa fa-tags"></i>
+        <span class="centerMove">设备模型数:[{{dModelNum}}]</span>
+    </div>
+    <div class="active">
+        <i class="fa fa-paperclip"></i>
+        <span class="centerMove">功能点</span>
+    </div>
+</div>
+
+<!--显示设备列表栏-->
+<div id ="allDevice">
+    <table id="allDeviceTable" class="table table-hover">
+        <thead>
+            <tr>
+                <td style="font-weight: bold;">设备id</td>
+                <td style="font-weight: bold;">设备名称</td>
+                <td style="font-weight: bold;">设备模型</td>
+                <span id="backList" ng-click="backList()" title="返回设备列表"><i class="fa fa-mail-reply"></i></span>
+                
+            </tr>
+<!--div id ="allDevice">
+    <table id="allDeviceTable" class="table table-hover">
+        <thead>
+        <tr>
+            <td colspan="2">
+                <div class="input-group"  id="searchDeviceDiv">
+                    <input type="text" class="form-control" placeholder="请输入设备名称..." id="searchDevice">
+                    <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" id="btn" ng-click="searchDeviceInfo()"><i class="fa fa-search"></i></button>
+                        </span>
+                </div>
+            </td>
+            <td>
+                <span ng-click="changeIcon()"><i class="fa fa-angle-double-down" id="icon"></i></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size: large">设备id</td>
+            <td style="font-weight: bold;font-size: large">设备名称</td>
+        </tr>
+
+        <span style="display: inherit;text-align: right;position: relative;">
+                    <button class="btn btn-primary" type="button" id="btnList" ng-click="closeDeviceList()"><i class="fa fa-close"></i></button>
+                    <button class="btn btn-primary" type="button" id="btnFirst" ng-click="reShowList()" title="回到首页"><i class="fa fa-angle-down"></i></button>
+            </span> -->
+        </thead>
+        <tbody id="showDevice">
+        <tr ng-repeat="data in deviceList" ng-click="show(data)">
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>
+                <i ng-if="checkModel(data)" class="fa fa-check"></i>
+                <i ng-if="!checkModel(data)" class="fa fa-close"></i>
+            </td>
+            <!-- <td ng-if="!checkModel(data)"><i class="fa fa-close"></i></td> -->
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-default button" id="pre" ng-click="prePage()">上一页</button>
+    <button class="btn btn-default button" id="next" ng-click="nextPage()">下一页</button>
+</div>
+
+
+<!--右侧详情框-->
+<div id ="showDeviceInfo">
+    <span style="display: inherit;text-align: right;position: relative;">
+            <button class="btn btn-primary" type="button" id="btnIn" ng-click="closeDeviceInfo()"><i class="fa fa-close"></i></button>
+    </span>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th colspan="2">{{name}}</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>设备ID:</td>
+            <td id="mySceneUse">{{id}}</td>
+        </tr>
+        <tr>
+            <td>父类设备:</td>
+            <td>{{parentDeviceId}}</td>
+        </tr>
+        <tr>
+            <td>厂商：</td>
+            <td>{{manufacture}}</td>
+        </tr>
+        <tr>
+            <td>设备类型:</td>
+            <td>{{deviceType}}</td>
+        </tr>
+        <tr>
+            <td>型号：</td>
+            <td>{{model}}</td>
+        </tr>
+        <tr>
+            <td>状态：</td>
+            <td>{{status}}</td>
+        </tr>
+        <tr>
+            <td>位置：</td>
+            <td>{{location}}</td>
+        </tr>
+        <tr>
+            <td class="attName">操作：</td>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal"
+                        data-target="#refreshDevice"  ng-click="addModel()">添加模型</button>
+                <button class="btn btn-primary" data-toggle="modal"
+                        data-target="#deleteModel">消除模型</button>
+                <!-- <button class="btn btn-primary" data-toggle="modal"
+                        data-target="#updatePosition" ng-click="_updatePosition()">更新位置</button> -->
+                <button class="btn btn-primary" data-toggle="modal"
+                    ng-click="_updatePosition()">更新位置</button>
+                <button class="btn btn-primary" data-toggle="modal"
+                        data-target="#assign" ng-click="lookAt(id)">定位模型</button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--添加模型-->
+<!--div id ="addModel">
+    <span style="display: inherit;text-align: right;position: relative;">
+            <button class="btn btn-primary" type="button" id="b" ng-click="closeAddModel()"><i class="fa fa-close"></i></button>
+    </span>
+    <span class="modal-title">
+        <button></button>
+        <button></button>
+    </span>
+    <div id="defaultModel">
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>位置
+        </label>
+        <input type="text" id="manufacturerName" required/>
+
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>X
+        </label>
+        <input type="text" id="deviceType" required/>
+
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>Y
+        </label>
+        <input type="text" required/>
+
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>Z
+        </label>
+        <input type="text" required/>
+
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>比例
+        </label>
+        <input type="text" required/>
+    </div>
+    <div>
+        <label class="col-sm-3 control-label" style="text-align: left">
+            <span style="color: red;">*</span>side
+        </label>
+        <input type="text" required/>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="submit()">
+            确认
+        </button>
+        <button type="button" class="btn btn-success" ng-click="reSet()">
+            重置
+        </button>
+    </div>
+
+</div-->
+<div id ="addModel">
+    <span style="display: inherit;text-align: right;position: relative;">
+            <button class="btn btn-primary" type="button" id="b" ng-click="closeAddModel()"><i class="fa fa-close"></i></button>
+    </span>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">默认模型</a></li>
+            <li><a href="#tabs-2">上传模型</a></li>
+        </ul>
+        <div id="tabs-1">
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>位置
+                </label><br/>
+                <span>X:</span><input type="text" id="xValue" required/>
+                <span>Y:</span><input type="text" id="yValue" required/>
+                <span>Z:</span><input type="text" id="zValue" required/><br/>
+            </div>
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>比例
+                </label><br/>
+                <span>X:</span><input type="text" id="xScaleValue" value ="0.02" placeholder="0.02" required/>
+                <span>Y:</span><input type="text" id="yScaleValue" value ="0.02" placeholder="0.02" required/>
+                <span>Z:</span><input type="text" id="zScaleValue" value ="0.02" placeholder="0.02" required/><br/>
+            </div>
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>旋转
+                </label><br/>
+                <span>X:</span><input type="text" id="xRotationValue" value =Math.PI/2 placeholder="Math.PI" required/>
+                <span>Y:</span><input type="text" id="yRotationValue" value =Math.PI/2 placeholder="Math.PI" required/>
+                <span>Z:</span><input type="text" id="zRotationValue" value ="0" placeholder="0" required/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="submitModel()">
+                    确认
+                </button>
+                <button type="button" class="btn btn-info" ng-click="application()">
+                    应用
+                </button>
+                <button type="button" class="btn btn-success" ng-click="reSet()">
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <!--上传模型-->
+        <div id="tabs-2">
+            <p style="color: #5087c3;text-align: left"><span style="color: red;">*</span>选择文件:</p>
+            <div class="fontColor">
+                <span class="btn btn-mini btn-info fileInput">
+                <span>选择文件</span>
+                <input type="file"  id="fileToUpload" onchange="angular.element(this).scope().fileSelected()"  multiple >
+                </span>
+            <button ng-click="updateFile()" class="btn btn-mini btn-success">上传</button><br/>
+            <span >文件名：</span> <input type="text" id="file1" style="width:120px"/><br/>
+            <span>进度：</span><progress max="100" value="0" id="progressNumber"></progress>
+            </div>
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>位置
+                </label><br/>
+                <span>X:</span><input type="text" id="xValue-s" required/>
+                <span>Y:</span><input type="text" id="yValue-s" required/>
+                <span>Z:</span><input type="text" id="zValue-s" required/><br/>
+            </div>
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>比例
+                </label><br/>
+                <span>X:</span><input type="text" id="xScaleValue-s" value ="0.02" placeholder="0.02" required/>
+                <span>Y:</span><input type="text" id="yScaleValue-s" value ="0.02" placeholder="0.02" required/>
+                <span>Z:</span><input type="text" id="zScaleValue-s" value ="0.02" placeholder="0.02" required/><br/>
+            </div>
+            <div class="fontColor">
+                <label class="col-cm-3 control-label">
+                    <span style="color: red;">*</span>旋转
+                </label><br/>
+                <span>X:</span><input type="text" id="xRotationValue-s" value =Math.PI/2 placeholder="Math.PI" required/>
+                <span>Y:</span><input type="text" id="yRotationValue-s" value =Math.PI/2 placeholder="Math.PI" required/>
+                <span>Z:</span><input type="text" id="zRotationValue-s" value ="0" placeholder="0" required/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="uploadModel()">
+                    确认
+                </button>
+                <button type="button" class="btn btn-success" ng-click="uploadReSet()">
+                    重置
+                </button>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!--消除模型模态框-->
+    <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModaLabel">
+                        删除模型
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    确定删除此模型？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="delModel()">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--更新位置-->
+<div id ="updatePosition">
+    <span style="display: inherit;text-align: right;position: relative;">
+            <button class="btn btn-primary" type="button" ng-click="closeUpdate()"><i class="fa fa-close"></i></button>
+    </span>
+    <div class="fontColors">
+        <label class="col-cm-3 control-label">
+            <span style="color: red;">*</span>位置
+        </label><br/>
+        <span>X:</span><input type="text" id="xUpdate" required/><br/>
+        <span>Y:</span><input type="text" id="yUpdate" required/><br/>
+        <span>Z:</span><input type="text" id="zUpdate" required/><br/>
+    </div>
+    <div class="fontColors">
+        <label class="col-cm-3 control-label">
+            <span style="color: red;">*</span>比例
+        </label><br/>
+        <span>X:</span><input type="text" value ="0.02" id="xBili" placeholder="0.02" required/><br/>
+        <span>Y:</span><input type="text" value ="0.02" id="yBili" placeholder="0.02" required/><br/>
+        <span>Z:</span><input type="text" value ="0.02" id="zBili" placeholder="0.02" required/><br/>
+    </div>
+    <div class="fontColors">
+        <label class="col-cm-3 control-label">
+            <span style="color: red;">*</span>旋转
+        </label><br/>
+        <span>X:</span><input type="text" id="xXuan" value =Math.PI/2 placeholder=Math.PI/2 required/><br/>
+        <span>Y:</span><input type="text" id="yXuan" value =Math.PI/2 placeholder=Math.PI/2 required/><br/>
+        <span>Z:</span><input type="text" id="zXuan" value ="0" placeholder="0" required/><br/><br/>
+    </div>
+    <div class="fontColors" style="text-align: right">
+        <button type="button" class="btn btn-danger" ng-click="updateDeviceModel()">
+            确认
+        </button>
+        <button type="button" class="btn btn-info" ng-click="application()">
+            应用
+        </button>
+        <button type="button" class="btn btn-success" ng-click="reSet()">
+            重置
+        </button>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+{% endraw %}

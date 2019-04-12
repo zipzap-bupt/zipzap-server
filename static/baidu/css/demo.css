@@ -1,0 +1,104 @@
+﻿/*---------------------------------------公共样式(请勿修改)---------------------------------------------*/
+/*body { margin: 0; font-family: "Helvetica,Arial,FreeSans"; color: #000000; font-size: 12px; }*/
+body,html {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#allmap{width:100%;height:95%;}
+/*p{margin:10px 5px 15px 20px; font-size:14px;}*/
+/*fieldset { border: 1px solid gray;; }*/
+/*body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}*/
+.demo_content { padding: 10px; margin-bottom: 10px; border: solid 1px gray;height:105%;width: 102%}
+
+/*.nav li{   
+ padding: 8px 15px;    
+ float: right;   
+ list-style: none;   
+ color:#fff;  
+}*/ 
+#btn {
+    float:right;
+    width: 8%;
+    padding: 0 20px;
+    height: 25px;
+    border: 1px solid #7ba92c;
+    border-radius: 4px;
+    /*font-weight: bold;*/
+}
+#address {
+    /*left: 80px;*/
+    position:absolute;
+    right:10%;
+    /*float:right;*/
+}
+.anjian {
+    width:100%;
+    height:30px;
+    line-height:24px;
+    border: 1px solid #7ba92c;
+    color:#FFFFFF;
+    background: radial-gradient(#70c2f4,#035384);
+    border-radius: 5px;
+    /*padding-left:24px;*/
+}
+
+/*progress
+{    
+    width: 250px;
+    height: 25px;      
+}*/
+/*进度条*/
+#progressBar
+{
+    width: 65%;
+    height: 25px;
+}
+
+/*设备列表*/
+#deviceListPage 
+{
+    display: block;
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.right table td 
+{
+    font-size:15px;
+
+}
+/*翻页按钮*/
+#btn1
+{
+    text-align: center;
+}
+/*站点模态框*/
+.siteModalClass{
+    margin: 30px 10px 0 10px;
+    cursor: pointer;
+    padding: 20px;
+    width: 150px;
+    height: 125px;
+    border: 2px solid #c0c0c0;
+    /*float: right;*/
+    border-radius: 10px;
+    background: white;
+}
+#siteModal
+{
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+/*列表首行*/
+.firstTr {
+    border: 1px solid #d6dfe6;
+    background: linear-gradient(to bottom, #f3f8fc, #ebf4f9, #e3f1fa, #e0f0fd, #d8e9fd);
+}
+.firstTr th {
+    border-right: 2px solid rgba(209, 218, 223, 0.4);
+}
+#deviceListTh{
+    font-size:20px;
+}
+
+/*---------------------------------------自定义样式---------------------------------------------*/
+

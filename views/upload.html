@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>设备模型上传</title>
+    <link type="text/css" href="../static/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+    * {
+        font-family: "Arial", "Microsoft YaHei", "宋体", sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;font-weight:bold;">设备模型上传</h3>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input id="modelname" class="form-control" type="text" name="modelname" placeholder="请输入模型名称(如:传感器)" />
+                <br />
+                <input id="lefile" type="file" style="display:none">
+                <div class="input-group">
+                    <input id="show" class="form-control" type="text" placeholder="模型类型为:obj/stl" style="height:30px;">
+                    <div class="btn input-group-addon" onclick="document.getElementById('lefile').click();">选择模型</div>
+                </div>
+                <div id="mydiv" style="border:1px dashed #ccc;border-top:none;height:130px;text-align:center;line-height:130px">
+                    <p><i class="glyphicon glyphicon-plus"></i>拖拽上传
+                        <p>
+                </div>
+                <br />
+                <button class="btn" id="upload">上传</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("lefile").onchange = function() {
+            document.getElementById("show").value = this.value;
+        };
+        document.getElementById("upload").onclick = function() {
+            var lefile = document.getElementById("lefile").files[0];
+            var modelname = document.getElementById("modelname").value;
+            upload(modelname, lefile, "upload.php");
+        }
+        
+        
+
+        //拖拽上传
+        var mydiv = document.getElementById("mydiv");
+        mydiv.addEventListener('dragenter', function(event) {
+            event.preventDefault();
+        });
+        mydiv.addEventListener('dragover', function(event) {
+            event.preventDefault();
+        });
+        mydiv.addEventListener('drop', function(event) {
+            event.preventDefault();
+            var file = event.dataTransfer.files[0];
+            var modelname = document.getElementById("modelname").value;
+            upload(modele, file, "upload.php");
+        });
+
+        function upload(modelname, file, url) {
+            var data = new FormData();
+            data.append("file", file);
+            data.append("modelname", modelname);
+            if (file) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("post", url, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            alert("上传成功");
+                        } else {
+                            alert("上传失败");
+                        }
+                    }
+                };
+                xhr.send(data);
+            } else {
+                alert("未选择文件");
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>

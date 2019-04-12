@@ -1,0 +1,19 @@
+#my public:
+public/upload/scenes/*
+public/upload/devices/*
+!public/upload/scenes/README.md
+!public/upload/devices/README.md
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history

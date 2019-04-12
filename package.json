@@ -1,0 +1,40 @@
+{
+    "name": "rest-koa",
+    "version": "1.0.0",
+    "description": "koa 2 example with rest api",
+    "main": "app.js",
+    "scripts": {
+        "start": "node --use_strict app.js"
+    },
+    "keywords": [
+        "koa",
+        "rest",
+        "api"
+    ],
+    "author": "Michael Liao",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/michaelliao/learn-javascript.git"
+    },
+    "dependencies": {
+        "koa": "2.0.0",
+        "koa-bodyparser": "3.2.0",
+        "koa-router": "7.0.0",
+        "nunjucks": "2.4.2",
+        "mime": "1.4.1",
+        "mz": "2.4.0",
+        "sequelize": "3.24.1",
+        "mysql": "2.11.1",
+        "uuid": "3.2.1",
+        "axios": "0.18.0",
+        "koa-better-body": "3.0.4",
+        "path": "0.12.7",
+        "moment": "2.22.1",
+        "superagent": "4.0.0-beta.5",
+        "ws": "6.0.0",
+        "url": "0.11.0",
+        "cookies": "0.7.1",
+        "koa-session": "5.9.0"
+    }
+}

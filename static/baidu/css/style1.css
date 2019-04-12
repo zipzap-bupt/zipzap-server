@@ -1,0 +1,486 @@
+﻿
+/*======================================
+    GENERAL STYLES
+======================================= */
+
+.b-clr {
+    color:#000;
+}
+.sec-menu {
+    background-color:#305680;
+    padding-top:20px;
+    padding-bottom:15px;
+    color:#fff;
+    font-size:22px;
+
+}
+.content-wrapper {
+    min-height:1000px;
+    background: rgb(238,238,238);
+    padding-left: 45px;
+}
+
+/* =============================================================
+HEAD MENU STYLES
+============================================================ */
+#quit{
+
+   float: right;
+}
+
+#backIcon{
+    cursor: pointer;
+    color: #ffffff;
+}
+
+
+
+/* =============================================================
+   SIDE MENU STYLES
+ ============================================================ */
+
+#side-menu {
+    height: 100%;
+    position: fixed;
+      left: -250px;
+    background-color: #305680;
+    /*#3AB056*/
+    color: #fff;
+    z-index: 999;
+    overflow: auto;
+    max-width: 500px;
+    overflow:auto;
+}
+
+    #side-menu ul {
+        list-style: none;
+        padding: 0px;
+    }
+
+        #side-menu ul li {
+            border-bottom: 1px dashed #cccccc;
+            padding: 21px 25px;
+            text-align: left;
+        }
+
+            #side-menu ul li a i {
+                padding-right: 10px;
+            }
+
+            #side-menu ul li a, #side-menu ul li a:hover {
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+.menu-close-icon, .menu-open-icon {
+    cursor: pointer;
+
+}
+.fontStyle{
+    font-size: 20px;
+}
+.textStyle{
+    font-size: 18px;
+    font-weight: bold;
+}
+#searchKey{
+    height: 34px;
+}
+#attrSelectInfoTd{
+    vertical-align: middle;
+}
+
+
+
+
+
+/* =============================================================
+ICON STYLES
+============================================================ */
+
+ul,li{
+    list-style: none;
+
+}
+
+.homeIconBackground{
+    width: 200px;
+    height: 200px;
+    background:#305680;
+    border-radius: 30px;
+    margin-top: 50px;
+    margin-left: 150px;
+    float: left;
+    cursor: pointer;
+
+}
+.homeIcon{
+
+    color: #ffffff;
+    font-size: 50px;
+    margin-top: 50px;
+    margin-left: 70px;
+}
+.homeIconName{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+.chooseBtn{
+    margin-top: 25px;
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 20px;
+    width: 150px;
+    height: 100px;
+    border: 2px solid #c0c0c0;
+    float: left;
+    border-radius: 10px;
+    background: white;
+}
+.chooseBtn div i{
+    color: #305680;
+    font-size: 30px;
+    text-align: center;
+    display: block;
+
+}
+.chooseBtn div p{
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* =============================================================
+DEVICELIST STYLES
+============================================================ */
+#deviceListIcon{
+    width: 48%;
+    float: left;
+    padding-top:10px;
+    padding-left: 10px;
+}
+
+#deviceListChart{
+    width: 40%;
+    float: left;
+    margin-top: 20px;
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+
+}
+
+.attName{
+  font-weight: bold;
+  width: 150px;
+  text-align: center;
+}
+
+.inputInfo{
+    width: 90%;
+}
+
+.input-err{
+
+    border: 2px solid #ff3c3c;
+}
+.showForm table tbody tr td{
+   width: 30%;
+   text-align: center;
+}
+.boldForm{
+    font-weight: bold;
+
+}
+.divide-line{
+    border-top: 2px solid #c0c0c0;
+}
+.ctrlDivBtn{
+    margin-left: 60px;
+    margin-top: 5px;
+}
+.pagination li{
+    cursor: pointer;
+}
+#preDevice,#nextDevice{
+    margin-top: 17%;
+    width: 2%;
+    height: 30px;
+    float: left;
+    background: #c0c0c0;
+    opacity: 0.3;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    color: #7e7e7e;
+}
+#nextDevice{
+    margin-right: 40px;
+}
+/* =============================================================
+   DeviceGroup
+ ============================================================ */
+.LeftView{
+    margin:0px 0 0 35px;
+    float: left;
+    width:600px;
+}
+.DGTitle{
+    margin:5px 0 0 10px;
+    height: 60px;
+}
+.DGminTitle{
+    height: 20px;
+}
+.DGContainer{
+    margin: -30px 0px 0 -30px;
+}
+.SearchDG{
+    float: right;
+    height: 20px;
+    margin-top: 10px;
+    margin-right:20px;
+    width: 180px;
+}
+.Searchicon{
+    margin-left: -25px;
+    color:#adadad;
+}
+
+/* =============================================================
+   DeviceGroupAssign
+ ============================================================ */
+.RightView{
+    margin:40px 5px 0 670px;
+    padding-top: 10px;
+    width:500px;
+    height:1000px;
+}
+.RightviewTitle{
+    font-size: 20px;
+}
+.item{
+    margin:15px 20px;
+}
+.gridStyle{
+    border:1px solid rgb(212,212,212);
+    margin: 0 0 10px 0;
+}
+.DGgridstyle{
+    height: 270px;
+}
+.shand{
+    cursor:pointer;
+}
+.DGAssignContainer{
+    border:1px solid rgb(212,212,212);
+    background-color: #fdfdfd;
+    margin:5px 0 0 0;
+}
+.iedit{
+    margin-left:5px;
+}
+#deviceGroupEmpty{
+    color: #adadad;
+    font-size: large;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+/* =============================================================
+   Rule
+ ============================================================ */
+.RulegridStyle{
+    height: 60px;
+}
+.RuleBtn{
+    width:175px ;
+    margin-left: 25px;
+    padding:15px 5px;
+}
+.ruleiconcontainer{
+    float: right;
+    margin: 5px 10px;
+}
+.ruleicon{
+    margin:0 5px;
+}
+.ruleicon:hover{
+    color: #df5b58;
+}
+#RuleModalInput{
+    margin-top: 15px;
+    width: 450px;
+    height: 125px;
+}
+.stateActive{
+    color: #33ce2d;
+}
+.stateNActive{
+    color: #ff5945;
+}
+.addfiltertab{
+    width:530px;
+    margin-left: 20px;
+}
+.StarMark{
+    font-size: 15px;
+    margin-right:5px;
+    color: red;
+}
+.alertempty{
+    display:none;
+    color: red;
+}
+/* =============================================================
+serviceGroup
+============================================================ */
+.abilityBackgroundstyle{
+    width: 235px;
+    height: 145px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 15px;
+    float: left;
+
+    cursor: pointer;
+    padding: 20px;
+    border: 2px solid #c0c0c0;
+    background: white;
+
+}
+.homeIconstyle{
+
+    color:  #305680;
+    font-size: 30px;
+    margin-top: -7px;
+    margin-left: 0px;
+}
+.abilityPlus{
+    float: right;
+    font-size: x-large;
+    color: #305680;
+    margin-top: -10px;
+}
+.abilityDelete{
+    font-size: large;
+    margin-top: -10px;
+    margin-left: 8px;
+}
+.style{
+    color:  #305680;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.mainDiv{
+    margin: 100px 210px 75px 350px;
+}
+.positionThree{
+    margin-left: 650px;
+    margin-bottom: 0px;
+}
+.positionFour{
+    margin-left: 430px;
+}
+.positionFive{
+    margin-right: auto;
+}
+.span2{
+    margin-left: 666px;
+}
+.abilityChart{
+    margin:30px 0 0 670px;
+    padding-top: 5px;
+    width:460px;
+    height:516px;
+    overflow-y: auto;
+    float: right;
+    margin-left: 790px;
+    position: fixed;
+    background: rgba(255,253,255,0.69);
+    border-radius: 5px;
+}
+.abilityIcon{
+    width: 70%;
+    float: left;
+    padding-top:10px;
+
+}
+
+/* =============================================================
+pluginsGroup
+============================================================ */
+.pluginActiveposition{
+    margin-left: 250px;
+    color: #305680;
+    font-size: large;
+    margin-top: -50px;
+}
+.pluginStopposition{
+    margin-left: 250px;
+    color: #305680;
+    font-size: large;
+}
+.stylePulgin{
+    color:  #305680;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.homeBackgroundstyle{
+    margin: 30px 10px 0 20px;
+    cursor: pointer;
+    padding: 20px;
+    width: 150px;
+    height: 100px;
+    border: 2px solid #c0c0c0;
+    float: left;
+    border-radius: 10px;
+    background: white;
+
+}
+.pluginChart{
+    background: #feffff;
+    margin:20px 0px 0 670px;
+    padding-top: 5px;
+    width:450px;
+    height:250px;
+    float: right;
+    margin-left: 790px;
+    position: fixed;
+}
+.pluginIcon{
+    width: 70%;
+    float: left;
+    padding-top:10px;
+}
+.positionTwo{
+    margin-left: 25px;
+}
+.postionOne{
+    margin-left: 180px;
+
+}
+.btnPosition{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.PluginInfo{
+    font-size: 28px;
+    color: #305680;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+.displayPosition{
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 15px;
+    color: #0f0f0f;
+    font-weight: 400;
+}

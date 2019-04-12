@@ -1,0 +1,104 @@
+﻿
+    <!-- DEVICE DETAIL -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="deviceDetail" aria-hidden="false">
+        <!--.modal:指定为模态框      fade:淡入淡出效果     tabindex="-1":不受tab键控制    role="dialog":指定模态框为对话框-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseTagDetail">&times;</button>
+                    <h4 class="modal-title" style="font-weight: bold;font-size: 20px;">设备详情</h4>
+                </div>
+                <div class="modal-body showForm" id="detailTable">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th class="attName" style="text-align: left;font-size: 16px;">-----属性-----</th>
+                        </tr>
+                        <tr>
+
+                            <td id="attrSelectInfoTd">
+                                每页显示
+                                <select id="attrSelectInfo" ng-change="showNum()" ng-model="myNum">
+                                    <option value="">5</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                </select>
+                                条记录
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="input-group">
+                                      <input type="text" class="form-control" placeholder="请输入键值查找..." id="searchKey">
+                                       <span class="input-group-btn">
+                                             <button class="btn btn-primary" type="button" ng-click="findKey()"><i class="fa fa-search"></i></button>
+                                       </span>
+                                </div>
+                                <!--<input type="text" class="form-control" placeholder="请输入键值搜索..." id="searchKey" ng-change="findKey()" ng-model="myKey">-->
+                            </td>
+                        </tr>
+
+                        <tr class="boldForm">
+                            <td style="width: 30%; text-align: center;">最后更新时间</td>
+                            <td style="width: 30%; text-align: center;">键</td>
+                            <td style="width: 30%; text-align: center;">值</td>
+                        </tr>
+                        </thead>
+                        <tbody id="attrDisplay" class="data-list"></tbody>
+                    </table>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+                <div class="divide-line"></div>
+                <div class="modal-body showForm" id="realTimeTable">
+                    <h4 class="detail-block-header">-----最新遥测-----</h4>
+                    <div class="row">
+                        <div>
+                            <table id="realtime_data_table" class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width: 30%; text-align: center;">最后更新时间</th>
+                                    <th style="width: 30%; text-align: center;">键</th>
+                                    <th style="width: 30%; text-align: center;">值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="divide-line"></div>
+
+                <div class="modal-body showHistoryData" id="historyDataTable">
+                    <h4 class="detail-block-header">-----历史数据-----</h4>
+
+                     <label>起始时间：</label>
+                     <input type="datetime-local" id="startTime" min="2018-06-01T00:00" value="2018-07-01T00:00"/>
+
+                     <label>终止时间：</label>
+                     <input type="datetime-local" id="endTime" min="2018-07-01T00:00"/>
+
+                     <i class="fa fa-search" id="showHistory" ng-click="subTime()"></i>
+
+                     <div id="historyEcharts" style="width: 569px;height: 200px;margin-top: 10px;"></div>
+
+                </div>
+
+                <div class="divide-line"></div>
+
+                <div class="modal-body showForm" id="controlTable">
+                    <h4 class="detail-block-header">-----控制面板-----</h4>
+                    <div class="row">
+                        <div class="control-panel" id="control_panel">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseDetail">关闭</button>
+                    <button type="button" class="btn btn-primary" id="modalConfirmDetail" data-dismiss="modal">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
