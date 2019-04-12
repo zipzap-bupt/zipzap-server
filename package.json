@@ -1,7 +1,7 @@
 {
-    "name": "rest-koa",
+    "name": "zipzap-server",
     "version": "1.0.0",
-    "description": "koa 2 example with rest api",
+    "description": "base restful api and compression service for zipzap",
     "main": "app.js",
     "scripts": {
         "start": "node --use_strict app.js"
@@ -11,30 +11,30 @@
         "rest",
         "api"
     ],
-    "author": "Michael Liao",
+    "author": "Chen jiaxi",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/michaelliao/learn-javascript.git"
+        "url": "https://github.com/zipzap-bupt/zipzap-server.git"
     },
     "dependencies": {
-        "koa": "2.0.0",
+        "axios": "0.18.0",
+        "cookies": "0.7.1",
+        "koa": "^2.7.0",
+        "koa-better-body": "3.0.4",
         "koa-bodyparser": "3.2.0",
         "koa-router": "7.0.0",
-        "nunjucks": "2.4.2",
+        "koa-session": "5.9.0",
         "mime": "1.4.1",
-        "mz": "2.4.0",
-        "sequelize": "3.24.1",
-        "mysql": "2.11.1",
-        "uuid": "3.2.1",
-        "axios": "0.18.0",
-        "koa-better-body": "3.0.4",
-        "path": "0.12.7",
         "moment": "2.22.1",
+        "mysql": "^2.16.0",
+        "mz": "2.4.0",
+        "nunjucks": "2.4.3",
+        "path": "0.12.7",
+        "sequelize": "5.3.0",
         "superagent": "4.0.0-beta.5",
-        "ws": "6.0.0",
         "url": "0.11.0",
-        "cookies": "0.7.1",
-        "koa-session": "5.9.0"
+        "uuid": "3.2.1",
+        "ws": "6.0.0"
     }
 }
