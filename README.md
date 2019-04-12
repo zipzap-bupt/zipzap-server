@@ -1,14 +1,14 @@
-# zipzap-server ���� �ṩ������ api �� ѹ������
+# zipzap-server 提供基本的 api 和压缩服务
 
-## ��װ����
+## 安装依赖
 
 ```
 npm install
 ```
 
-## ��������
+## 快速启动
 
 ```
 npm start
-**����ʹ�� pm2 start,ʹ�� pm2 ���� node ����**
+**建议使用 pm2 start,使用 pm2 管理 node 进程**
 ```
